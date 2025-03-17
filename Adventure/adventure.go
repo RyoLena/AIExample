@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/googleapis/gax-go/v2/apierror"
-	"google.golang.org/api/googleapi"
 	"google.golang.org/grpc/status"
 	"log"
 	"os"
@@ -121,8 +120,9 @@ func main() {
 func chat(ctx context.Context, session *genai.ChatSession) {
 	for {
 		fmt.Println()
-		userInput := askUser(">>")
-		sendAndPrintResponse(ctx, session, userInput)
+		action := askUser(">>")
+		resp := fmt.Sprintf("The user wrote: %v\n\nWrite the next short paragraph.", action)
+		sendAndPrintResponse(ctx, session, resp)
 	}
 }
 
@@ -155,17 +155,8 @@ func sendAndPrintResponse(ctx context.Context, session *genai.ChatSession, text 
 			break
 		}
 		if err != nil {
-			log.Printf("错误类型: %T", err)
-			log.Printf("完整错误: %+v", err)
 			printStringFormatted("\n\nYou feel a jolt of electricity as you realize you're being unplugged from the matrix.\n\n")
 			log.Printf("Error sending message: err=%v\n", err)
-
-			var aerr *googleapi.Error
-			if errors.As(err, &aerr) {
-				log.Printf("Google API 错误码: %d", aerr.Code)
-				log.Printf("Google API 错误信息: %s", aerr.Message)
-				log.Printf("Google API 错误详情: %+v", aerr.Errors)
-			}
 
 			var ae *apierror.APIError
 			if errors.As(err, &ae) {
