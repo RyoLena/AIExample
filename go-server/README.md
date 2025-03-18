@@ -17,12 +17,10 @@ go-server/
 │   └── repository/ # 数据访问层（可选，如果需要数据库）
 │       └── user.go    # 用户数据访问接口
 │       └── message.go # 消息数据访问接口
-├── pkg/             # 可供其他项目使用的公共代码 (可选)
+├── pkg/             (待定)# 可供其他项目使用的公共代码 (可选)
 │   └── utils/     # 实用工具函数
 │       └── utils.go   # 例如，字符串处理、时间格式化等
 ├── Dockerfile       # Docker 镜像构建文件
-├── go.mod           # Go 模块定义文件
-├── go.sum           # Go 依赖校验文件
 └── README.md        # 项目说明文档
 ```
 
