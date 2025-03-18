@@ -1,0 +1,4 @@
+port: ":8080"
+
+pythonAIServiceURL: "http://0.0.0.0:9001"
+pythonAIServiceTimeout: "10s"
